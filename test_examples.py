@@ -1,6 +1,7 @@
 import asyncio
-from google_news import GoogleNewsTool
-from linkedin_tool import LinkedinDataTool
+
+from examples.google_news import GoogleNewsTool
+from examples.linkedin_tool import LinkedinDataTool
 
 
 
@@ -21,7 +22,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-

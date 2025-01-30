@@ -19,7 +19,7 @@ producer = Agent(
 news_reporter = Agent(
     name="News Reporter",
     instructions="""
-You are a hard news reporter. 
+You are a hard news reporter.
 Call Google News to get headlines on the indicated news topic.
 Then write an NPR-style news report based on the hedalines.
 """,
@@ -32,4 +32,3 @@ response = client.run(
 )
 
 print(response.messages[-1]["content"])
-

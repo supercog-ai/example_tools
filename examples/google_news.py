@@ -43,7 +43,7 @@ class GoogleNewsTool():
         df['pubDate'] = pd.to_datetime(df['pubDate'], utc=True)
         df['pubDate'] = df['pubDate'].dt.date
         return str(df)
-    
+
     def get_top_headlines(self, language: str = 'en', country: str = 'US') -> pd.DataFrame:
         """Gets top headlines for the specified language and country."""
         gnf = GoogleNewsFeed(language=language, country=country)
@@ -56,7 +56,7 @@ class GoogleNewsTool():
         results = gnf.query_topic(topic)
         return self._news_items_to_df(results)
 
-    def query_news(self, query: str, language: str = 'en', country: str = 'US', 
+    def query_news(self, query: str, language: str = 'en', country: str = 'US',
                    before: date = None, after: date = None, back_days: int = 1,
                    exact_phrase: str = None, exclude_terms: List[str] = None,
                    site: str = None, in_title: bool = False, in_url: bool = False,
@@ -82,7 +82,7 @@ class GoogleNewsTool():
             A DataFrame where each row is a news item.
         """
         gnf = GoogleNewsFeed(language=language, country=country, resolve_internal_links=False)
-        
+
         # Construct advanced query
         if exact_phrase:
             query += f' "{exact_phrase}"'
@@ -125,11 +125,11 @@ class GoogleNewsTool():
         gnf = GoogleNewsFeed(language=language, country=country)
         results = gnf.query(f'location:"{location}"')
         return self._news_items_to_df(results[:max_results])
-        
+
     def get_local_topics(self, location: str, language: str = 'en', country: str = 'US', num_topics: int = 10) -> Dict[str, Any]:
         """
         Analyzes news to extract trending topics for a specific location.
-        
+
         Args:
             location (str): The specific location for which to analyze news (e.g., "New York", "Paris", "Tokyo").
             language (str): The language for the news feed.
@@ -144,7 +144,7 @@ class GoogleNewsTool():
         """
         gnf = GoogleNewsFeed(language=language, country=country)
         local_news = gnf.query(f'location:"{location}"')
-        
+
         # Extract words from headlines
         words = []
         headlines = []
@@ -152,16 +152,16 @@ class GoogleNewsTool():
             headline = article.title.lower()
             headlines.append(headline)
             words.extend(headline.split())
-        
+
         # Remove common words and location name
         stop_words = set(['the', 'best', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'of', 'and', 'or', 'but', 'is', 'are', 'was', 'were'])
         stop_words.update(location.lower().split())
         words = [word for word in words if word not in stop_words and len(word) > 2]
-        
+
         # Count word frequency and get top N most common words as local topics
         word_counts = Counter(words)
         local_topics = [word for word, _ in word_counts.most_common(num_topics)]
-        
+
         # Get sample headlines for top topics
         sample_headlines = []
         for topic in local_topics[:5]:  # Get samples for top 5 topics
@@ -169,7 +169,7 @@ class GoogleNewsTool():
                 if topic in headline and headline not in sample_headlines:
                     sample_headlines.append(headline)
                     break
-        
+
         return {
             'topics': local_topics,
             'topic_frequencies': {topic: count for topic, count in word_counts.most_common(num_topics)},
@@ -179,7 +179,7 @@ class GoogleNewsTool():
     def get_trending_topics(self, language: str = 'en', country: str = 'US', num_topics: int = 10) -> List[str]:
         """
         Retrieves a list of currently trending topics on Google News.
-        
+
         This function approximates trending topics by analyzing the frequency of words
         in the top headlines. It's not an official "trending topics" feature, but it
         gives an indication of frequently mentioned topics.
@@ -194,18 +194,18 @@ class GoogleNewsTool():
         """
         gnf = GoogleNewsFeed(language=language, country=country)
         headlines = gnf.top_headlines()
-        
+
         # Extract words from headlines
         words = ' '.join([article.title for article in headlines]).lower().split()
-        
+
         # Remove common words (you might want to expand this list)
         stop_words = set(['the', 'a', 'an', 'best', 'in', 'on', 'at', 'to', 'for', 'of', 'and', 'or', 'but'])
         words = [word for word in words if word not in stop_words and len(word) > 2]
-        
+
         # Count word frequency and get top N most common words as trending topics
         word_counts = Counter(words)
         trending_topics = [word for word, _ in word_counts.most_common(num_topics)]
-        
+
         return trending_topics
 
     def explain_search_syntax(self) -> str:

@@ -1,2 +1,7 @@
 *.pyc
+**.egg-info
 
+.envrc
+.python-version
+
+.vscode

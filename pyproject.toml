@@ -12,6 +12,7 @@ googlenewsdecoder = "^0.1.7"
 google-news-feed = "^1.1.0"
 html2text = "^2024.2.26"
 pandas = "^2.2.3"
+swarm = {git = "https://github.com/openai/swarm.git"}
 
 
 [build-system]

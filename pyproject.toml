@@ -1,8 +1,7 @@
 [project]
 name = "example-tools"
-authors = ["Scott Persinger <scottpersinger@gmail.com>"]
 version = "0.1.0"
-description = "Add your description here"
+description = "Example implementations of agents, using various tools."
 readme = "README.md"
 
 requires-python = ">=3.11"

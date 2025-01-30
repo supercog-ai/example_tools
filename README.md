@@ -8,6 +8,12 @@ First, create a virtual environment:
 $ uv venv
 ```
 
+If you don't have `uv` installed, you can install it with:
+
+```bash
+$ brew install uv
+```
+
 Then, activate the virtual environment:
 
 ```bash

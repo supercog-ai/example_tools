@@ -14,7 +14,7 @@ producer = Agent(
     ),
 )
 news_reporter = Agent(
-    "gpt-4o",
+    "gpt-4o-mini",
     system_prompt=(
         "You are a hard news reporter."
         "Call Google News to get headlines on the indicated news topic."

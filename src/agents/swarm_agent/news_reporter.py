@@ -21,7 +21,7 @@ news_reporter = Agent(
     instructions="""
 You are a hard news reporter.
 Call Google News to get headlines on the indicated news topic.
-Then write an NPR-style news report based on the hedalines.
+Then write an NPR-style news report based on the headlines.
 """,
     functions=[query_news],
 )

@@ -5,6 +5,7 @@ from pydantic_ai.usage import UsageLimits
 
 from tools import GoogleNewsTool
 
+# Create the agents.
 
 producer = Agent(
     "gpt-4o-mini",
@@ -25,12 +26,16 @@ news_reporter = Agent(
 
 @producer.tool
 async def call_news_reporter(ctx: RunContext[None], topic: str) -> list[str]:
+    """Call the news reporter to get the news about the given topic."""
+
     r = await news_reporter.run(topic)
     return r.data
 
 
 @news_reporter.tool
 async def get_google_news_headlines(ctx: RunContext[None], topic: str) -> list[str]:
+    """Get the news about the given topic from Google News."""
+
     gnt = GoogleNewsTool()
     return str(gnt.query_news(topic))
 

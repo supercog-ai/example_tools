@@ -12,4 +12,5 @@ dependencies = [
     "html2text >= 2024.2.26",
     "pandas >= 2.2.3",
     "swarm @ git+https://github.com/openai/swarm.git",
+    "pytest"
 ]

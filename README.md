@@ -1,5 +1,11 @@
 # example_tools
 
+Example implementations of various API tools and agents, including:
+
+- Google News search and analysis
+- LinkedIn profile and company data retrieval
+- Web browsing and content extraction
+
 ## Installing Python Dependencies
 
 First, create a virtual environment:
@@ -23,7 +29,7 @@ $ source .venv/bin/activate
 Finally, install the dependencies:
 
 ```bash
-$ uv pip install -e .
+$ uv pip install -e '.[dev]'
 ```
 
 ## Run the Examples
@@ -37,3 +43,9 @@ $ source .venv/bin/activate
 Then, run the tool tests:
 ```bash
 $ python test_tools.py
+```
+
+or, you can use pytest:
+```bash
+$ pytest
+```

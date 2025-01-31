@@ -13,6 +13,7 @@ To run the examples, you will need to set the following environment variables:
 ```bash
 export RAPIDAPI_KEY=<api_key>
 export OPENAI_API_KEY=<api_key>
+export SCRAPINGBEE_API_KEY=<api_key>
 ```
 
 If needed, you can use a tool of your choice for loading the environment variables with the provided `.env.example` file.

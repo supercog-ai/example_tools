@@ -6,7 +6,7 @@ import os
 from googlenewsdecoder import new_decoderv1
 
 from google_news_feed import GoogleNewsFeed, NewsItem
-from scaleserp_browser import ScaleSerpBrowserTool
+from .scaleserp_browser import ScaleSerpBrowserTool
 
 class GoogleNewsTool():
     browser_tool: ScaleSerpBrowserTool = None

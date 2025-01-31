@@ -13,6 +13,7 @@ dependencies = [
     "pandas >= 2.2.3",
     "swarm @ git+https://github.com/openai/swarm.git",
     "pydantic-ai>=0.0.21",
+    "simplemind[openai]>=0.3.2",
 ]
 
 [project.optional-dependencies]

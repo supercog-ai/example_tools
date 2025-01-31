@@ -23,7 +23,7 @@ $ source .venv/bin/activate
 Finally, install the dependencies:
 
 ```bash
-$ uv pip install .
+$ uv pip install -e .
 ```
 
 ## Run the Examples
@@ -34,7 +34,6 @@ To run the examples, ensure you have the virutual environment activated:
 $ source .venv/bin/activate
 ```
 
-Then, run the example:
+Then, run the tool tests:
 ```bash
-$ python example/google_news.py
-```
+$ python test_tools.py

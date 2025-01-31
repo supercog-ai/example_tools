@@ -1,15 +1,12 @@
 import asyncio
-from typing import Optional
-from urllib.parse import urlparse
 import os
+import re
+from typing import Callable
 
 import html2text
 #import requests
 import httpx
 
-
-import re
-from typing import Callable
 
 
 class ScaleSerpBrowserTool():
@@ -91,7 +88,7 @@ class ScaleSerpBrowserTool():
 
                         if 'organic_results' not in results:
                             return "ScaleSerp return no results."
-                        
+
                         for serp in results['organic_results'][0:5]:
                             urls.append((serp['link'], serp['title']))
                 except httpx.TimeoutException:
@@ -136,11 +133,11 @@ class ScaleSerpBrowserTool():
     async def download_pages(self, url_titles: list[tuple], max_concurrency=10) -> list[dict]:
         async with httpx.AsyncClient() as client:
             sem = asyncio.Semaphore(max_concurrency)
-            
+
             async def bounded_fetch(client, url, title):
                 async with sem:
                     return await self.download_page(client, url, title)
-            
+
             tasks = [bounded_fetch(client, url[0], url[1]) for url in url_titles]
             results = await asyncio.gather(*tasks)
 
@@ -153,12 +150,10 @@ class ScaleSerpBrowserTool():
             response = await client.get(url, follow_redirects=True)
             response.raise_for_status()  # Raise an exception for HTTP errors
             return {"url": url, "title": title, "content": response.content.decode()}
-        
+
         except httpx.HTTPError as e:
             print(f"HTTP Error for {url}: {e}")
             return {"url": url, "title": title, "error": str(e)}
         except Exception as e:
             print(f"Error downloading {url}: {e}")
             return {"url": url, "title": title, "error": str(e)}
-
-

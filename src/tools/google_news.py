@@ -1,11 +1,11 @@
-from typing import Any, Callable, Optional, List, Dict
+from typing import Any, Callable, List, Dict
 from collections import Counter
 from datetime import date
-import pandas as pd
-import os
-from googlenewsdecoder import new_decoderv1
 
+import pandas as pd
+from googlenewsdecoder import new_decoderv1
 from google_news_feed import GoogleNewsFeed, NewsItem
+
 from .scaleserp_browser import ScaleSerpBrowserTool
 
 class GoogleNewsTool():

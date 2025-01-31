@@ -20,7 +20,6 @@ news_reporter = Agent(
         "Call Google News to get headlines on the indicated news topic."
         "Then, respond with an NPR-style news report based on the headlines given."
     ),
-    result_type=list[str],
 )
 
 

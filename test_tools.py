@@ -1,6 +1,6 @@
 import asyncio
 
-from examples.tools import GoogleNewsTool, LinkedinDataTool
+from tools import GoogleNewsTool, LinkedinDataTool
 
 
 

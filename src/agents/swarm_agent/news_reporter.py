@@ -1,5 +1,5 @@
 from swarm import Swarm, Agent
-from google_news import GoogleNewsTool
+from tools import GoogleNewsTool
 
 client = Swarm()
 

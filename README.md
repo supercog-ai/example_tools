@@ -6,6 +6,18 @@ Example implementations of various API tools and agents, including:
 - LinkedIn profile and company data retrieval
 - Web browsing and content extraction
 
+## Environment Variables
+
+To run the examples, you will need to set the following environment variables:
+
+```bash
+export RAPIDAPI_KEY=<api_key>
+export OPENAI_API_KEY=<api_key>
+export SCALESERP_API_KEY=<api_key>
+```
+
+If needed, you can use a tool of your choice for loading the environment variables with the provided `.env.example` file.
+
 ## Installing Python Dependencies
 
 First, create a virtual environment:

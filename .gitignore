@@ -5,6 +5,7 @@ build
 __pycache__
 
 .envrc
+.env
 .python-version
 
 .vscode

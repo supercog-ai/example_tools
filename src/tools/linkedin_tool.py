@@ -73,7 +73,7 @@ class LinkedinDataTool():
         return location_id
 
     async def get_linkedin_profile_info(self,
-                                  profile_url: str) -> dict:
+                                  profile_url: str) -> str:
         """Tool that queries the LinkedIn Data API and gets back profile information.
         Args:
             profile_url: Full LinkedIn profile URL (e.g., https://www.linkedin.com/in/username/)
@@ -96,11 +96,7 @@ class LinkedinDataTool():
         response.raise_for_status()
         profile_data = response.json()
         df = pd.DataFrame([profile_data])
-        return self.get_dataframe_preview(
-            df,
-            max_rows=len(df),
-            name_hint="linkedin_profile_info",
-        )
+        return str(df)
 
     async def get_company_linkedin_info(self, company_username_or_domain: str) -> dict:
         """queries the LinkedIn Data API of rapidapi to get company information either by username or domain.
@@ -239,3 +235,28 @@ class LinkedinDataTool():
 
         # ToolFactory will automatically convert this list to a DataFrame
         return items
+
+    def linkedin_people_search_tst(self, name: str, company: Optional[str] = "") -> str:            
+        return """
+1. **Scott Persinger**
+   - **Title:** Assistant Vice President, Information Technology
+   - **Location:** Council Bluffs, IA
+   - [View Profile](https://www.linkedin.com/in/scott-persinger-79569144)
+
+2. **Scott Persinger**
+   - **Title:** Associate at Skadden, Arps, Slate, Meagher & Flom LLP
+   - **Location:** Chicago, IL
+   - [View Profile](https://www.linkedin.com/in/scott-persinger-313166134)
+
+3. **Scott Persinger**
+   - **Title:** Engagement Manager at GlideFast Consulting
+   - **Location:** St. Petersburg, FL
+   - ![Profile Picture](https://media.licdn.com/dms/image/v2/D4E03AQFgPDXDb4R-pg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1722259230079?e=1744243200&v=beta&t=0u1lTxPPIoCqMr7Xg5SKwCcdiWefdb1Cxs76yz_tRYQ)
+   - [View Profile](https://www.linkedin.com/in/scott-persinger-13270b4)
+
+4. **Scott Persinger**
+   - **Title:** CEO at Supercog AI, previous positions at Tatari, Stripe, Heroku, founder at CloudConnect
+   - **Location:** San Francisco, CA
+   - ![Profile Picture](https://media.licdn.com/dms/image/v2/C5603AQEkZLLKGXHz_g/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1577142760426?e=1744243200&v=beta&t=tJq5QtTCCA11s83DVL-v9YbF1jW3VnMPytRs3YWHisU)
+   - [View Profile](https://www.linkedin.com/in/scottpersinger)
+"""

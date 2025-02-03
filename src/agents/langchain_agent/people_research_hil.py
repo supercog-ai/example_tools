@@ -7,9 +7,17 @@ from langchain.chat_models import ChatOpenAI
 from langchain.agents import initialize_agent, AgentType, Tool
 from tools import LinkedinDataTool  # Your custom LinkedIn tool
 
+# Import Rich components
+from rich.console import Console
+from rich.table import Table
+from rich.prompt import Prompt
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Create a Rich console instance for styled output
+console = Console()
 
 # Instantiate your custom LinkedIn tool
 linkedin = LinkedinDataTool()
@@ -51,7 +59,7 @@ def parse_profiles_response(response: Any) -> Union[List[dict], str]:
 
 def get_user_choice(num_options: int) -> int:
     """
-    Prompt the user to select an option until a valid choice is made.
+    Prompt the user to select an option using Rich until a valid choice is made.
 
     Args:
         num_options: The number of available options.
@@ -60,14 +68,17 @@ def get_user_choice(num_options: int) -> int:
         The selected option as a 0-based index.
     """
     while True:
+        choice = Prompt.ask(f"Enter a number between 1 and {num_options}")
         try:
-            choice = int(input(f"Enter a number between 1 and {num_options}: "))
-            if 1 <= choice <= num_options:
-                return choice - 1  # Convert to 0-based index.
+            value = int(choice)
+            if 1 <= value <= num_options:
+                return value - 1  # Convert to 0-based index.
             else:
-                logger.info("Choice out of range.")
+                console.print(
+                    f"[red]Choice out of range. Please enter a number between 1 and {num_options}.[/red]"
+                )
         except ValueError:
-            logger.info("Invalid input. Please enter a valid integer.")
+            console.print("[red]Invalid input. Please enter a valid integer.[/red]")
 
 
 def search_profiles(name: str, company: str = "") -> str:
@@ -96,18 +107,24 @@ def search_profiles(name: str, company: str = "") -> str:
     elif len(profiles) == 1:
         selected_profile = profiles[0]
     else:
-        # Multiple profiles found: display them to the user.
-        logger.info("Multiple profiles found:")
-        for idx, profile in enumerate(profiles):
-            name_field = profile.get("name", "Unknown")
-            headline = profile.get("headline", "No headline")
-            url = profile.get("url", "No URL")
-            logger.info(f"{idx + 1}. {name_field} - {headline} - {url}")
+        # Display the profiles using a styled Rich table.
+        table = Table(title="Multiple profiles found. Please select one:")
+        table.add_column("Index", style="cyan", justify="right")
+        table.add_column("Name", style="magenta")
+        table.add_column("Headline", style="green")
+        table.add_column("URL", style="blue", overflow="fold")
 
+        for idx, profile in enumerate(profiles):
+            name_field = profile.get("fullName", "Unknown")
+            headline = profile.get("headline", "No headline")
+            url = profile.get("profileURL", "No URL")
+            table.add_row(str(idx + 1), name_field, headline, url)
+
+        console.print(table)
         selected_index = get_user_choice(len(profiles))
         selected_profile = profiles[selected_index]
 
-    # Return the selected profile as a JSON string.
+    # Return the selected profile as a pretty-printed JSON string.
     return json.dumps(selected_profile, indent=2)
 
 

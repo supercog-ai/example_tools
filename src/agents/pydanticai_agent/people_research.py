@@ -56,7 +56,7 @@ class GetProfileOutput(BaseModel):
 # -----------------------------------------------------------------------------
 
 # Create an agent using your chosen model identifier.
-agent = Agent("openai:gpt-4o")
+agent = Agent("openai:gpt-4o-mini")
 
 @agent.tool
 def search_profiles_tool(ctx: RunContext, input: SearchProfilesInput) -> SearchProfilesOutput:

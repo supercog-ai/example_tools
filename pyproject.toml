@@ -17,6 +17,7 @@ dependencies = [
     "langgraph>=0.2.69",
     "langchain-openai>=0.3.3",
     "ipython>=8.32.0",
+    "streamlit>=1.41.1",
 ]
 
 [project.optional-dependencies]
@@ -25,3 +26,7 @@ dev = [
     "pytest",
     "pytest-asyncio",
 ]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"

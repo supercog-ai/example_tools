@@ -8,10 +8,8 @@ from tools import GoogleNewsTool
 
 gnt = GoogleNewsTool()
 
-# This function simulates a call to a news API (e.g., Google News)
 def query_news(topic: str) -> str:
-    # In a real implementation, you would call an external API here.
-    # For demonstration, we return a simulated headline string.
+    """Query Google News to get headlines on the indicated news topic."""
     return str(gnt.query_news(topic))
 
 # Wrap query_news as a LangChain tool.

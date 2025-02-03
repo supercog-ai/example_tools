@@ -5,7 +5,6 @@ client = Swarm()
 
 gnt = GoogleNewsTool()
 def query_news(topic: str):
-    return "There is only good news today about the world of finance."
     return gnt.query_news(topic)
 
 def call_news_reporter():

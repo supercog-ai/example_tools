@@ -19,6 +19,7 @@ dependencies = [
     "ipython>=8.32.0",
     "streamlit>=1.41.1",
     "langchain>=0.3.17",
+    "rich>=13.9.4",
 ]
 
 [project.optional-dependencies]
